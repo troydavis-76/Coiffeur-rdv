@@ -1,57 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Coiffure Le Havre - RDV en ligne 24/7</title>
+  <title>Salon Coiffure Le Havre - RDV en ligne</title>
   <meta charset="utf-8">
   <style>
-    body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#333;padding:2em;max-width:500px;margin:auto}
-    h1{color:white;font-size:2.2em;text-align:center;text-shadow:2px 2px 4px rgba(0,0,0,0.3)}
-    .card{background:white;padding:2em;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,0.2);margin:1em 0}
-    .prix{font-size:1.5em;color:#e74c3c;font-weight:bold}
-    .services{list-style:none;padding:0}
-    .services li{padding:0.8em;background:#f8f9fa;border-radius:10px;margin:0.5em 0}
-    button{background:linear-gradient(45deg,#e74c3c,#c0392b);color:white;border:none;padding:1.2em;border-radius:25px;font-size:1.1em;cursor:pointer;width:100%;font-weight:bold}
-    input{width:100%;padding:1em;margin:0.5em 0;border:1px solid #ddd;border-radius:10px;font-size:1em}
-    .temoignage{font-style:italic;color:#555;border-left:4px solid #e74c3c;padding-left:1em}
+    body{font-family:system-ui;background:#f0f4f8;color:#333;padding:1.5em;max-width:500px;margin:auto}
+    h1{color:#1a365d;font-size:2em;text-align:center}
+    .card{background:white;padding:2em;border-radius:15px;box-shadow:0 8px 32px rgba(0,0,0,0.1);margin:1em 0}
+    .calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:0.5em;margin:1em 0}
+    .day{background:#e2e8f0;padding:1em;border-radius:10px;text-align:center;cursor:pointer;transition:all 0.3s}
+    .day:hover{background:#bee3f8}
+    .day.available{background:#48bb78;color:white}
+    .service{padding:0.8em;background:#edf2f7;border-radius:8px;margin:0.3em 0}
+    button{background:#3182ce;color:white;border:none;padding:1em;border-radius:10px;width:100%;font-weight:bold;cursor:pointer}
+    input{width:100%;padding:0.8em;margin:0.5em 0;border:1px solid #cbd5e0;border-radius:8px}
   </style>
 </head>
 <body>
-  <h1>💇‍♀️ Salon de Coiffure<br><small style="font-size:0.5em">Prise de RDV instantanée 24/7</small></h1>
+  <h1>💇‍♀️ Salon [VOTRE NOM]<br><small>RDV en ligne 24/7</small></h1>
   
   <div class="card">
-    <h2>📅 Services & Tarifs</h2>
-    <ul class="services">
-      <li>✨ Coupe Femme <span class="prix">38€</span></li>
-      <li>✨ Coupe Homme <span class="prix">28€</span></li>
-      <li>💇‍♀️ Brushing <span class="prix">25€</span></li>
-      <li>🎨 Coloration <span class="prix">55€</span></li>
-      <li>🔥 Barbering <span class="prix">35€</span></li>
-    </ul>
+    <h3>📅 Disponibilités cette semaine</h3>
+    <div class="calendar">
+      <div class="day available" onclick="selectDay('Lundi 14h')">Lun 14h</div>
+      <div class="day available" onclick="selectDay('Lundi 16h')">Lun 16h</div>
+      <div class="day available" onclick="selectDay('Mardi 10h')">Mar 10h</div>
+      <div class="day available" onclick="selectDay('Mardi 15h')">Mar 15h</div>
+      <div class="day available" onclick="selectDay('Mer 11h')">Mer 11h</div>
+      <div class="day" style="background:#fed7d7">Mer 14h</div>
+      <div class="day available" onclick="selectDay('Jeu 16h')">Jeu 16h</div>
+    </div>
   </div>
 
   <div class="card">
-    <h2>🚀 Votre avantage</h2>
-    <p><strong>250€ tout compris :</strong> Site + Agenda + Formation + Support</p>
-    <p class="temoignage">"Mon agenda est plein ! +15 RDV/semaine" - Salon Le Havre</p>
+    <h3>💇 Services</h3>
+    <div class="service">✨ Coupe Femme <strong>38€</strong> <span>(45min)</span></div>
+    <div class="service">✨ Coupe Homme <strong>28€</strong> <span>(30min)</span></div>
+    <div class="service">💇‍♀️ Brushing <strong>25€</strong> <span>(30min)</span></div>
+    <div class="service">🎨 Coloration <strong>55€</strong> <span>(1h30)</span></div>
   </div>
 
   <div class="card">
-    <h3>📱 Testez votre site maintenant</h3>
-    <input type="tel" placeholder="Votre numéro WhatsApp">
-    <button onclick="testSite()">DÉMO GRATUITE 5min ➡️</button>
-    <p style="font-size:0.9em;text-align:center;margin-top:1em">
-      Abdoul Salam - Le Havre<br>
-      Sites pour coiffeurs • 7j/7
+    <h3>✅ Confirmez votre RDV</h3>
+    <input id="nom" placeholder="Nom">
+    <input id="tel" type="tel" placeholder="Téléphone">
+    <input id="service" placeholder="Service choisi">
+    <button onclick="bookRDV()">RÉSERVER GRATUITEMENT</button>
+    <p style="font-size:0.8em;text-align:center;color:#666;margin-top:1em">
+      Votre site personnalisé : <strong>250€ tout compris</strong><br>
+      Abdoul Salam - Le Havre 7j/7
     </p>
   </div>
 
   <script>
-    function testSite() {
-      const num = document.querySelector('input').value;
-      if(num) {
-        window.open(`https://wa.me/33${num.replace(/D/g,'')}?text=Bonjour%20Abdoul%2C%20je%20veux%20voir%20la%20démo%20coiffeur`);
+    let selectedSlot = '';
+    function selectDay(slot) {
+      selectedSlot = slot;
+      document.querySelectorAll('.day.available').forEach(d => d.style.background = '#bee3f8');
+      event.target.style.background = '#48bb78';
+      document.getElementById('service').placeholder = `Service le ${slot}`;
+    }
+    
+    function bookRDV() {
+      const nom = document.getElementById('nom').value;
+      const tel = document.getElementById('tel').value;
+      if(selectedSlot && nom && tel) {
+        const message = `NOUVEAU RDV !
+Nom: ${nom}
+Tel: ${tel}
+Creneau: ${selectedSlot}`;
+        alert('✅ RDV confirmé !
+' + message + '
+
+Le coiffeur reçoit ça par SMS !');
       } else {
-        alert('Entrez votre numéro pour la démo ! 🚀');
+        alert('Choisis un créneau + nom + tel 🚀');
       }
     }
   </script>
