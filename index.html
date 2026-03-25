@@ -78,5 +78,43 @@ Le coiffeur reçoit ça par SMS !');
       }
     }
   </script>
+  <script>
+let selectedSlot = '';
+function selectDay(slot) {
+  selectedSlot = slot;
+  // Remet tous les jours en bleu
+  document.querySelectorAll('.day.available').forEach(d => {
+    d.style.background = '#bee3f8';
+    d.style.color = '#333';
+  });
+  // Le clicé devient VERT ÉPIQUE
+  event.target.style.background = '#38a169';
+  event.target.style.color = 'white';
+  event.target.style.transform = 'scale(1.05)';
+  
+  // Met le créneau dans le champ
+  document.getElementById('service').placeholder = `Service le ${slot}`;
+  document.getElementById('service').value = slot;
+}
+
+function bookRDV() {
+  const nom = document.getElementById('nom').value;
+  const tel = document.getElementById('tel').value;
+  const service = document.getElementById('service').value;
+  
+  if(selectedSlot && nom && tel) {
+    alert(`🎉 RDV CONFIRMÉ !
+
+👤 ${nom}
+📱 ${tel}
+⏰ ${service}
+
+✅ Le coiffeur reçoit SMS instantané
+💰 Site complet = 250€`);
+  } else {
+    alert('⚠️ Choisis un créneau + nom + tel !');
+  }
+}
+  </script>
 </body>
 </html>
