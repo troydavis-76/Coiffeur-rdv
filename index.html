@@ -7,517 +7,264 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:       #F9F5EF;
-    --dark:     #1A1410;
-    --accent:   #C9A96E;
-    --accent-l: #E8D5B0;
-    --muted:    #8C7E72;
-    --white:    #FFFFFF;
-    --panel:    #1A1410;
-  }
-  body.theme-or {
-    --bg:       #F9F5EF; --dark:     #1A1410;
-    --accent:   #C9A96E; --accent-l: #E8D5B0;
-    --muted:    #8C7E72; --panel:    #1A1410;
-  }
-  body.theme-sauge {
-    --bg:       #F2EDE6; --dark:     #2D3B2D;
-    --accent:   #7A9E7E; --accent-l: #B5CEAC;
-    --muted:    #7A8C72; --panel:    #2D3B2D;
-  }
-  body.theme-rose {
-    --bg:       #FDF6F4; --dark:     #2C1A1A;
-    --accent:   #C97B7B; --accent-l: #E8BABA;
-    --muted:    #9C7272; --panel:    #2C1A1A;
-  }
-  body.theme-marine {
-    --bg:       #F0F3F7; --dark:     #0D1B2A;
-    --accent:   #4A7FA5; --accent-l: #9DC0D8;
-    --muted:    #4A6E8A; --panel:    #0D1B2A;
+    --bg: #FDF6F4;        /* Crème rose */
+    --dark: #2C1A1A;      /* Bordeaux */
+    --accent: #C97B7B;    /* Rose poudré */
+    --accent-l: #E8BABA;  /* Rose clair */
+    --muted: #9C7272;     /* Rose foncé */
+    --white: #FFFFFF;
+    --panel: #2C1A1A;
   }
 
-  * { margin:0; padding:0; box-sizing:border-box; }
-
-  body {
-    background: var(--bg);
-    color: var(--dark);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-    transition: background 0.5s, color 0.5s;
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { 
+    background: var(--bg); color: var(--dark); 
+    font-family: 'DM Sans', sans-serif; 
+    font-weight: 300; overflow-x: hidden; 
   }
-
-  /* THEME BAR */
-  .theme-bar {
-    position: fixed;
-    top: 20px; right: 20px;
-    z-index: 200;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
-  }
-  .theme-bar-label {
-    font-size: 10px; font-weight: 500;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: rgba(255,255,255,0.45);
-  }
-  .theme-swatches {
-    display: flex; gap: 8px;
-    background: rgba(0,0,0,0.55);
-    padding: 10px 14px;
-    backdrop-filter: blur(8px);
-  }
-  .swatch {
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: transform 0.2s, border-color 0.2s;
-    position: relative;
-  }
-  .swatch:hover { transform: scale(1.2); }
-  .swatch.active { border-color: #fff; transform: scale(1.2); }
-  .swatch-or     { background: linear-gradient(135deg, #C9A96E 50%, #1A1410 50%); }
-  .swatch-sauge  { background: linear-gradient(135deg, #7A9E7E 50%, #2D3B2D 50%); }
-  .swatch-rose   { background: linear-gradient(135deg, #C97B7B 50%, #2C1A1A 50%); }
-  .swatch-marine { background: linear-gradient(135deg, #4A7FA5 50%, #0D1B2A 50%); }
-  .swatch-tooltip {
-    position: absolute;
-    bottom: calc(100% + 6px); left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.8);
-    color: #fff; font-size: 10px;
-    white-space: nowrap; padding: 4px 8px;
-    pointer-events: none; opacity: 0;
-    transition: opacity 0.2s;
-  }
-  .swatch:hover .swatch-tooltip { opacity: 1; }
 
   /* HERO */
   .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    overflow: hidden;
+    min-height: 100vh; 
+    display: grid; grid-template-columns: 1fr 1fr; 
+    position: relative; overflow: hidden;
   }
   .hero-left {
-    background: var(--panel);
-    display: flex; flex-direction: column;
-    justify-content: center;
-    padding: 80px 60px;
-    position: relative; overflow: hidden;
-    transition: background 0.5s;
-  }
-  .hero-left::before {
-    content: '';
-    position: absolute; top: -100px; left: -100px;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
-    pointer-events: none;
+    background: var(--panel); 
+    display: flex; flex-direction: column; 
+    justify-content: center; padding: 80px 60px;
   }
   .salon-tag {
-    font-size: 11px; font-weight: 500;
-    letter-spacing: 3px; text-transform: uppercase;
+    font-size: 11px; font-weight: 500; 
+    letter-spacing: 3px; text-transform: uppercase; 
     color: var(--accent); margin-bottom: 32px;
-    opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
-    transition: color 0.5s;
   }
   .hero-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 6vw, 80px);
-    font-weight: 300; line-height: 1.05;
-    color: var(--white); margin-bottom: 8px;
-    opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
+    font-size: clamp(52px, 6vw, 80px); font-weight: 300;
+    line-height: 1.05; color: var(--white); margin-bottom: 8px;
   }
-  .hero-title em { font-style: italic; color: var(--accent); transition: color 0.5s; }
+  .hero-title em { font-style: italic; color: var(--accent); }
   .hero-subtitle {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(14px, 1.5vw, 18px);
-    font-weight: 300; font-style: italic;
-    color: rgba(255,255,255,0.45); margin-bottom: 48px;
-    opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s;
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(14px, 1.5vw, 18px);
+    font-weight: 300; font-style: italic; color: var(--muted); margin-bottom: 48px;
   }
   .hero-cta {
     display: inline-flex; align-items: center; gap: 12px;
-    background: var(--accent); color: var(--dark);
-    padding: 16px 32px;
-    font-size: 13px; font-weight: 500;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    text-decoration: none; border: none; cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s;
-    width: fit-content;
+    background: var(--accent); color: var(--dark); padding: 16px 32px;
+    font-size: 13px; font-weight: 500; letter-spacing: 1.5px;
+    text-transform: uppercase; text-decoration: none; border: none;
+    cursor: pointer; transition: all 0.3s ease; width: fit-content;
   }
-  .hero-cta:hover { background: var(--accent-l); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
-  .hero-cta svg { transition: transform 0.3s; }
-  .hero-cta:hover svg { transform: translateX(4px); }
+  .hero-cta:hover { background: var(--accent-l); transform: translateY(-2px); }
 
-  .hero-right {
-    position: relative; overflow: hidden;
-    background: var(--panel);
-    filter: brightness(0.8);
-    transition: background 0.5s;
-  }
-  .hero-pattern {
-    position: absolute; inset: 0; opacity: 0.07;
-    background-image: repeating-linear-gradient(45deg, var(--accent) 0, var(--accent) 1px, transparent 0, transparent 50%);
-    background-size: 20px 20px;
-    transition: background-image 0.5s;
+  .hero-right { 
+    position: relative; overflow: hidden; 
+    background: var(--panel); 
+    display: flex; justify-content: center; align-items: center;
   }
   .hero-right-content {
-    position: relative; z-index: 2;
-    display: flex; flex-direction: column;
-    justify-content: center; align-items: center;
-    height: 100%; padding: 60px 40px; text-align: center;
+    text-align: center; padding: 60px 40px; color: var(--white);
   }
-  .scissors-icon {
-    font-size: 80px; margin-bottom: 32px;
-    opacity: 0; animation: fadeIn 1s ease forwards 1s;
-  }
-  .opening-hours { opacity: 0; animation: fadeIn 1s ease forwards 1.2s; }
-  .opening-hours h3 {
-    font-size: 11px; font-weight: 500;
-    letter-spacing: 3px; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 20px;
-    transition: color 0.5s;
-  }
-  .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
-  .hours-item {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px; color: rgba(255,255,255,0.6); text-align: left;
-  }
-  .hours-item span { color: var(--accent-l); transition: color 0.5s; }
-  .divider-line {
-    width: 40px; height: 1px;
-    background: var(--accent); margin: 28px auto; opacity: 0.5;
-    transition: background 0.5s;
-  }
-  .address { font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 1px; }
+  .scissors-icon { font-size: 80px; margin-bottom: 32px; }
+  .address { font-size: 12px; color: rgba(255,255,255,0.65); }
 
   /* BOOKING */
   .booking-section { padding: 120px 80px; max-width: 1200px; margin: 0 auto; }
-  .section-label {
-    font-size: 11px; font-weight: 500;
-    letter-spacing: 3px; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 16px;
-    display: flex; align-items: center; gap: 16px;
-    transition: color 0.5s;
-  }
-  .section-label::after {
-    content: ''; flex: 1; max-width: 60px;
-    height: 1px; background: var(--accent); opacity: 0.4;
-    transition: background 0.5s;
-  }
   .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 4vw, 56px);
-    font-weight: 300; line-height: 1.1;
-    margin-bottom: 64px; color: var(--dark);
-    transition: color 0.5s;
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300; line-height: 1.1; margin-bottom: 64px; color: var(--dark);
   }
-  .section-title em { font-style: italic; color: var(--muted); transition: color 0.5s; }
-  .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+  .booking-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
 
+  /* SERVICES */
   .services-list { display: flex; flex-direction: column; }
   .service-item {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
+    padding: 20px 0; border-bottom: 1px solid rgba(44,26,26,0.1);
+    cursor: pointer; transition: all 0.3s ease; position: relative;
   }
-  .service-item::before {
-    content: ''; position: absolute; left: -20px; top: 50%;
-    transform: translateY(-50%);
-    width: 0; height: 2px; background: var(--accent);
-    transition: width 0.3s, background 0.5s;
-  }
-  .service-item:hover::before, .service-item.selected::before { width: 12px; }
-  .service-item:hover, .service-item.selected { padding-left: 20px; border-bottom-color: var(--accent); }
-  .service-item:hover .service-name, .service-item.selected .service-name { color: var(--accent); }
+  .service-item:hover { padding-left: 20px; border-bottom-color: var(--accent); }
+  .service-item:hover .service-name { color: var(--accent); }
   .service-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px; font-weight: 400; color: var(--dark);
-    transition: color 0.3s;
+    font-family: 'Cormorant Garamond', serif; font-size: 20px; 
+    font-weight: 400; color: var(--dark);
   }
-  .service-meta { display: flex; align-items: center; gap: 16px; }
-  .service-duration { font-size: 12px; color: var(--muted); letter-spacing: 0.5px; transition: color 0.5s; }
   .service-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px; font-weight: 600; color: var(--dark);
-    min-width: 60px; text-align: right; transition: color 0.5s;
+    font-family: 'Cormorant Garamond', serif; font-size: 22px;
+    font-weight: 600; color: var(--dark); min-width: 60px; text-align: right;
   }
+  .service-duration { font-size: 12px; color: var(--muted); }
 
+  /* FORM */
   .booking-form {
-    background: var(--panel); padding: 48px;
-    position: relative; overflow: hidden;
-    transition: background 0.5s;
+    background: var(--panel); padding: 48px; border-radius: 20px;
+    color: var(--white);
   }
-  .booking-form::before {
-    content: ''; position: absolute; top: 0; right: 0;
-    width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
-    pointer-events: none;
+  .form-title { 
+    font-family: 'Cormorant Garamond', serif; font-size: 28px; 
+    font-weight: 300; margin-bottom: 8px; 
   }
-  .form-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px; font-weight: 300; color: var(--white); margin-bottom: 8px;
+  .slots-grid { 
+    display: grid; grid-template-columns: repeat(3, 1fr); 
+    gap: 12px; margin: 24px 0; 
   }
-  .form-subtitle { font-size: 13px; color: var(--accent); margin-bottom: 36px; transition: color 0.5s; }
-  .slots-label {
-    font-size: 11px; font-weight: 500;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 16px; transition: color 0.5s;
-  }
-  .slots-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 28px; }
   .slot {
-    padding: 10px 8px;
-    border: 1px solid rgba(255,255,255,0.1);
-    background: transparent; color: rgba(255,255,255,0.5);
-    font-size: 13px; cursor: pointer;
-    transition: all 0.2s; text-align: center;
+    padding: 12px; border: 1px solid rgba(255,255,255,0.2);
+    background: transparent; color: rgba(255,255,255,0.7);
+    cursor: pointer; transition: all 0.3s; border-radius: 8px; text-align: center;
   }
-  .slot:hover { border-color: var(--accent); color: var(--accent); }
-  .slot.active { background: var(--accent); border-color: var(--accent); color: var(--dark); font-weight: 500; }
-  .form-field { margin-bottom: 16px; }
+  .slot:hover { border-color: var(--accent); color: var(--accent); background: rgba(201,123,123,0.1); }
+  .slot.active { background: var(--accent); color: var(--dark); }
+
   .form-field input {
-    width: 100%;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--white); padding: 14px 16px;
-    font-family: 'DM Sans', sans-serif; font-size: 14px;
-    outline: none; transition: border-color 0.2s;
+    width: 100%; background: rgba(255,255,255,0.1); 
+    border: 1px solid rgba(255,255,255,0.2); color: var(--white);
+    padding: 14px 16px; font-size: 14px; border-radius: 8px;
+    margin-bottom: 16px;
   }
-  .form-field input::placeholder { color: rgba(255,255,255,0.22); }
-  .form-field input:focus { border-color: var(--accent); }
+  .form-field input::placeholder { color: rgba(255,255,255,0.4); }
+  .form-field input:focus { border-color: var(--accent); outline: none; }
+
   .btn-reserve {
     width: 100%; background: var(--accent); color: var(--dark);
-    border: none; padding: 18px;
-    font-family: 'DM Sans', sans-serif; font-size: 13px;
-    font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
-    cursor: pointer; transition: all 0.3s; margin-top: 8px;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
+    border: none; padding: 18px; font-weight: 500; letter-spacing: 1px;
+    text-transform: uppercase; cursor: pointer; border-radius: 10px;
+    font-size: 14px; transition: all 0.3s;
   }
-  .btn-reserve:hover { background: var(--accent-l); transform: translateY(-1px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
-  .secure-note {
-    display: flex; align-items: center; gap: 8px;
-    margin-top: 14px; font-size: 11px;
-    color: rgba(255,255,255,0.25); justify-content: center;
-  }
+  .btn-reserve:hover { background: var(--accent-l); transform: translateY(-2px); }
 
   /* FOOTER */
   .footer {
     background: var(--panel); padding: 32px 80px;
-    display: flex; align-items: center; justify-content: space-between;
-    transition: background 0.5s;
+    color: var(--white); text-align: center; font-size: 13px;
   }
-  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--white); font-weight: 300; }
-  .footer-credit { font-size: 11px; color: rgba(255,255,255,0.25); letter-spacing: 1px; }
-  .footer-credit span { color: var(--accent); transition: color 0.5s; }
+  .footer span { color: var(--accent); }
 
-  /* OVERLAY */
-  .overlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.75); z-index: 300;
-    align-items: center; justify-content: center;
-    backdrop-filter: blur(4px);
-  }
-  .overlay.show { display: flex; }
-  .overlay-card {
-    background: var(--bg); padding: 64px;
-    max-width: 480px; text-align: center;
-    animation: scaleIn 0.4s ease; transition: background 0.5s;
-  }
-  .overlay-icon { font-size: 56px; margin-bottom: 24px; }
-  .overlay-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 36px; font-weight: 300; color: var(--dark); margin-bottom: 12px;
-    transition: color 0.5s;
-  }
-  .overlay-text { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 32px; transition: color 0.5s; }
-  .overlay-close {
-    background: var(--dark); color: var(--white); border: none;
-    padding: 14px 40px; font-size: 12px; font-weight: 500;
-    letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-  }
-  .overlay-close:hover { background: var(--accent); color: var(--dark); }
-
-  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
-  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-  @keyframes scaleIn { from { opacity:0; transform:scale(0.92); } to { opacity:1; transform:scale(1); } }
-
+  /* RESPONSIVE */
   @media (max-width: 900px) {
     .hero { grid-template-columns: 1fr; }
-    .hero-right { min-height: 280px; }
-    .hero-left { padding: 60px 32px; }
-    .booking-section { padding: 80px 32px; }
     .booking-grid { grid-template-columns: 1fr; gap: 48px; }
-    .footer { padding: 24px 32px; flex-direction: column; gap: 12px; text-align: center; }
-    .booking-form { padding: 32px 24px; }
-    .theme-bar { top: 12px; right: 12px; }
+    .booking-section { padding: 60px 32px; }
   }
 </style>
 </head>
-<body class="theme-sauge">
-
-<!-- THEME SWITCHER -->
-<div class="theme-bar">
-  <div class="theme-bar-label">Couleur</div>
-  <div class="theme-swatches">
-    <div class="swatch swatch-or"     onclick="setTheme('or')">     <span class="swatch-tooltip">Or & Noir</span></div>
-    <div class="swatch swatch-sauge active" onclick="setTheme('sauge')"> <span class="swatch-tooltip">Sauge & Crème</span></div>
-    <div class="swatch swatch-rose"   onclick="setTheme('rose')">   <span class="swatch-tooltip">Rose & Bois</span></div>
-    <div class="swatch swatch-marine" onclick="setTheme('marine')"> <span class="swatch-tooltip">Marine & Azur</span></div>
-  </div>
-</div>
+<body>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
     <div class="salon-tag">✦ Salon de coiffure — Le Havre</div>
     <h1 class="hero-title">Salon<br><em>Élise</em></h1>
-    <p class="hero-subtitle">L'art de sublimer chaque chevelure, depuis 2010</p>
-    <a href="#booking" class="hero-cta">
-      Prendre rendez-vous
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-    </a>
+    <p class="hero-subtitle">Prise de rendez-vous 24/7 pour tous vos soins capillaires</p>
+    <a href="#booking" class="hero-cta">Prendre rendez-vous →</a>
   </div>
   <div class="hero-right">
-    <div class="hero-pattern"></div>
     <div class="hero-right-content">
       <div class="scissors-icon">✂️</div>
-      <div class="opening-hours">
-        <h3>Horaires d'ouverture</h3>
-        <div class="hours-grid">
-          <div class="hours-item">Lundi <span>9h–18h</span></div>
-          <div class="hours-item">Mardi <span>9h–18h</span></div>
-          <div class="hours-item">Mercredi <span>9h–18h</span></div>
-          <div class="hours-item">Jeudi <span>9h–20h</span></div>
-          <div class="hours-item">Vendredi <span>9h–20h</span></div>
-          <div class="hours-item">Samedi <span>8h–17h</span></div>
-        </div>
-        <div class="divider-line"></div>
-        <div class="address">📍 12 Rue de Paris, Le Havre</div>
-      </div>
+      <div class="address">📍 12 Rue de Paris, Le Havre</div>
     </div>
   </div>
 </section>
 
 <!-- BOOKING -->
 <section class="booking-section" id="booking">
-  <div class="section-label">Réservation en ligne</div>
-  <h2 class="section-title">Choisissez votre<br><em>prestation</em></h2>
+  <h2 class="section-title">Choisissez votre<br>prestation</h2>
+  
   <div class="booking-grid">
+    <!-- SERVICES -->
     <div class="services-list">
-      <div class="service-item selected" data-service="Coupe Femme" data-price="38€" data-duration="45 min" onclick="selectService(this)">
+      <div class="service-item selected" data-service="Coupe Femme" data-price="38€" data-duration="45min" onclick="selectService(this)">
         <span class="service-name">Coupe Femme</span>
-        <div class="service-meta"><span class="service-duration">45 min</span><span class="service-price">38€</span></div>
+        <div><span class="service-duration">45min</span><span class="service-price">38€</span></div>
       </div>
-      <div class="service-item" data-service="Coupe Homme" data-price="28€" data-duration="30 min" onclick="selectService(this)">
+      <div class="service-item" data-service="Coupe Homme" data-price="28€" data-duration="30min" onclick="selectService(this)">
         <span class="service-name">Coupe Homme</span>
-        <div class="service-meta"><span class="service-duration">30 min</span><span class="service-price">28€</span></div>
+        <div><span class="service-duration">30min</span><span class="service-price">28€</span></div>
       </div>
-      <div class="service-item" data-service="Brushing" data-price="25€" data-duration="30 min" onclick="selectService(this)">
+      <div class="service-item" data-service="Brushing" data-price="25€" data-duration="30min" onclick="selectService(this)">
         <span class="service-name">Brushing</span>
-        <div class="service-meta"><span class="service-duration">30 min</span><span class="service-price">25€</span></div>
+        <div><span class="service-duration">30min</span><span class="service-price">25€</span></div>
       </div>
       <div class="service-item" data-service="Coloration" data-price="55€" data-duration="1h30" onclick="selectService(this)">
         <span class="service-name">Coloration</span>
-        <div class="service-meta"><span class="service-duration">1h30</span><span class="service-price">55€</span></div>
-      </div>
-      <div class="service-item" data-service="Soin & Masque" data-price="22€" data-duration="20 min" onclick="selectService(this)">
-        <span class="service-name">Soin & Masque</span>
-        <div class="service-meta"><span class="service-duration">20 min</span><span class="service-price">22€</span></div>
-      </div>
-      <div class="service-item" data-service="Coupe + Brushing" data-price="58€" data-duration="1h15" onclick="selectService(this)">
-        <span class="service-name">Coupe + Brushing</span>
-        <div class="service-meta"><span class="service-duration">1h15</span><span class="service-price">58€</span></div>
+        <div><span class="service-duration">1h30</span><span class="service-price">55€</span></div>
       </div>
     </div>
 
+    <!-- FORM -->
     <div class="booking-form">
       <h3 class="form-title">Votre rendez-vous</h3>
-      <p class="form-subtitle" id="selectedServiceLabel">✦ Coupe Femme — 45 min — 38€</p>
       <div class="slots-label">Créneaux disponibles</div>
       <div class="slots-grid">
-        <div class="slot" onclick="selectSlot(this)">Lun 9h00</div>
-        <div class="slot active" onclick="selectSlot(this)">Lun 14h00</div>
-        <div class="slot" onclick="selectSlot(this)">Lun 16h30</div>
-        <div class="slot" onclick="selectSlot(this)">Mar 10h00</div>
-        <div class="slot" onclick="selectSlot(this)">Mar 15h00</div>
-        <div class="slot" onclick="selectSlot(this)">Mer 11h00</div>
-        <div class="slot" onclick="selectSlot(this)">Mer 14h00</div>
-        <div class="slot" onclick="selectSlot(this)">Jeu 16h00</div>
-        <div class="slot" onclick="selectSlot(this)">Sam 9h00</div>
+        <div class="slot" onclick="selectSlot(this)">14h00</div>
+        <div class="slot" onclick="selectSlot(this)">16h00</div>
+        <div class="slot" onclick="selectSlot(this)">18h00</div>
+        <div class="slot active" onclick="selectSlot(this)">10h00</div>
+        <div class="slot" onclick="selectSlot(this)">12h00</div>
+        <div class="slot" onclick="selectSlot(this)">15h00</div>
       </div>
-      <div class="form-field"><input type="text" placeholder="Votre prénom & nom" id="nameInput"></div>
-      <div class="form-field"><input type="tel" placeholder="Votre numéro de téléphone" id="phoneInput"></div>
-      <button class="btn-reserve" onclick="confirmBooking()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-          <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-        </svg>
-        Confirmer le rendez-vous
+      
+      <div class="form-field">
+        <input type="text" id="nom" placeholder="Nom complet">
+      </div>
+      <div class="form-field">
+        <input type="tel" id="tel" placeholder="Téléphone">
+      </div>
+      <button class="btn-reserve" onclick="bookAppointment()">
+        Réserver gratuitement
       </button>
-      <div class="secure-note">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-        </svg>
-        Réservation gratuite · Annulation libre
+      <div style="font-size: 12px; margin-top: 20px; opacity: 0.8;">
+        💰 Votre site personnalisé : <strong>250€ tout compris</strong><br>
+        Abdoul Sow — Le Havre • 7j/7
       </div>
     </div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-brand">Salon Élise</div>
-  <div class="footer-credit">Site réalisé par <span>Abdoul Sow</span> · Solutions digitales Le Havre</div>
-</footer>
-
-<div class="overlay" id="overlay">
-  <div class="overlay-card">
-    <div class="overlay-icon">✅</div>
-    <h3 class="overlay-title">Rendez-vous confirmé</h3>
-    <p class="overlay-text" id="confirmText">Votre réservation a bien été prise en compte.<br>Vous recevrez une confirmation par SMS.</p>
-    <button class="overlay-close" onclick="document.getElementById('overlay').classList.remove('show')">Parfait, merci</button>
-  </div>
-</div>
+  <div>
+    Site créé par <span>Abdoul Sow</span> • Solutions digitales Le Havre
+  </footer>
 
 <script>
-  function setTheme(name) {
-    document.body.className = 'theme-' + name;
-    document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
-    document.querySelector('.swatch-' + name).classList.add('active');
+let selectedService = 'Coupe Femme - 38€';
+let selectedSlot = '10h00';
+
+function selectService(element) {
+  document.querySelectorAll('.service-item').forEach(el => el.classList.remove('selected'));
+  element.classList.add('selected');
+  selectedService = element.dataset.service + ' - ' + element.dataset.price;
+}
+
+function selectSlot(element) {
+  document.querySelectorAll('.slot').forEach(el => el.classList.remove('active'));
+  element.classList.add('active');
+  selectedSlot = element.textContent;
+}
+
+function bookAppointment() {
+  const nom = document.getElementById('nom').value;
+  const tel = document.getElementById('tel').value;
+  
+  if(nom && tel && selectedService && selectedSlot) {
+    const message = `🎉 NOUVEAU RDV CONFIRMÉ !
+
+👤 ${nom}
+📱 ${tel}
+💇 ${selectedService}
+⏰ ${selectedSlot}
+
+✅ SMS envoyé au salon !`;
+    alert(message + '
+
+💰 SITE IDENTIQUE = 250€ tout compris - Abdoul Sow');
+  } else {
+    alert('Veuillez remplir tous les champs !');
   }
-  function selectService(el) {
-    document.querySelectorAll('.service-item').forEach(i => i.classList.remove('selected'));
-    el.classList.add('selected');
-    document.getElementById('selectedServiceLabel').textContent =
-      `✦ ${el.dataset.service} — ${el.dataset.duration} — ${el.dataset.price}`;
-  }
-  function selectSlot(el) {
-    document.querySelectorAll('.slot').forEach(s => s.classList.remove('active'));
-    el.classList.add('active');
-  }
-  function confirmBooking() {
-    const name  = document.getElementById('nameInput').value.trim();
-    const phone = document.getElementById('phoneInput').value.trim();
-    const slot    = document.querySelector('.slot.active');
-    const service = document.querySelector('.service-item.selected');
-    if (!name || !phone) { alert('Merci de renseigner votre nom et téléphone.'); return; }
-    document.getElementById('confirmText').innerHTML =
-      `<strong>${name}</strong>, votre rendez-vous <em>${service.dataset.service}</em><br>
-       le <strong>${slot.textContent}</strong> est bien confirmé.<br><br>
-       Montant : <strong>${service.dataset.price}</strong> · SMS de rappel envoyé.`;
-    document.getElementById('overlay').classList.add('show');
-  }
-  document.querySelector('.hero-cta').addEventListener('click', e => {
-    e.preventDefault();
-    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-  });
+}
 </script>
+
 </body>
 </html>
